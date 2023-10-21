@@ -1,5 +1,3 @@
-require "langchain"
-
 module Chains
 
   class MainChain
@@ -7,11 +5,11 @@ module Chains
       @@paragraphs = ((script.duration * 1.5)/50).ceil
       @@word_count = (script.duration * 1.5).ceil
 
-      @@context_prompt = "You are a viral content maker for a social media platform. You only speak Brazillian portuguese. Your goal is to generate a script to be used by an influencer following the constraints defined in the JSON structure below. You should use at most #{@@paragraphs} paragraphs. Use #{@@word_count} words. Do not use emojis nor hashtags. The main theme of the script will be defined in brackets."
+      @@context_prompt = "Você é um criador de conteúdo viral para uma plataforma de mídia social. Você fala apenas português brasileiro. Seu objetivo é gerar um roteiro a ser usado por um influenciador, seguindo as restrições definidas na estrutura JSON abaixo. Você deve usar no máximo #{@@paragraphs} parágrafos. Use no máximo #{@@word_count} palavras. Não use emojis nem hashtags. O tema principal do roteiro será definido entre colchetes."
 
       llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_API_KEY"])
 
-      @@final_prompt = "constraints = {category: #{script.category}, duration_in_seconds: #{script.duration}, mood: #{script.mood}} [#{script.description}]"
+      @@final_prompt = "restrições = {categoria: #{script.category}, duração_em_segundos: #{script.duration}, entonação: #{script.mood}} [#{script.description}]"
 
       chat = Langchain::Conversation.new(llm: llm, temperature: 0.9, model: "gpt-4")
       chat.set_context(@@context_prompt)
