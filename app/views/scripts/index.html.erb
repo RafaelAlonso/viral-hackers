@@ -1,16 +1,19 @@
-<h1>Scripts</h1>
+<div class="container">
+  <h1>Scripts</h1>
 
-<ul>
+  <ul>
   <% @scripts.each do |script| %>
     <li>
-      <p><b>Categoria:</b> <%= script.category %></p>
-      <p><b>Contexto:</b> <%= script.context %></p>
-      <p><b>Duração:</b> <%= script.duration %></p>
-      <p><b>Humor:</b> <%= script.mood %></p>
-      <p><b>Status:</b> <%= script.status %></p>
-      <%= link_to 'Ver Script', script_path(script) %>
+    <p><b>Categoria:</b> <%= script.category %></p>
+    <p><b>Contexto:</b> <%= script.context %></p>
+    <p><b>Duração:</b> <%= script.duration %></p>
+    <p><b>Humor:</b> <%= script.mood %></p>
+    <p><b>Status:</b> <%= script.status %></p>
+    <%= link_to 'Ver Script', script_path(script) %>
     </li>
-  <% end %>
-</ul>
+    <% end %>
+    </ul>
 
-<%= link_to 'new script', new_script_path %>
+    <%= link_to 'new script', new_script_path %>
+    </div>
+</div>
