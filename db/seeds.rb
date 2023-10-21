@@ -1,6 +1,7 @@
 return unless Rails.env.development?
 
-puts "Limpando categorias e contextos"
+puts "Limpando scripts, categorias e contextos"
+Script.destroy_all
 Category.destroy_all # destrói contextos também (dependent: :destroy)
 puts "=" * 10
 

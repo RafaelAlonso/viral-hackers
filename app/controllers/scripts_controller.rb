@@ -11,7 +11,7 @@ class ScriptsController < ApplicationController
     @script = Script.new(script_params)
     @script.user = current_user
     if @script.save
-      redirect_to scripts_path
+      redirect_to @script
     else
       render :new
     end
@@ -24,6 +24,6 @@ class ScriptsController < ApplicationController
   private
 
   def script_params
-    params.require(:script).permit(:category, :context, :duration, :mood, :description)
+    params.require(:script).permit(:category_id, :context, :duration, :mood, :description)
   end
 end
