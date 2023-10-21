@@ -52,4 +52,14 @@ class Script < ApplicationRecord
   validates :category, :context, :duration, :mood, :status, presence: true
   validates :duration, inclusion: { in: [30, 60, 120] }
   validates :description, length: { minimum: 5, maximum: 250 }, allow_blank: true
+
+  def self.humanized_categories
+    {
+      'Saúde': 'health',
+      'Desenvolvimento Pessoal': 'personal_development',
+      'Marketing': 'marketing',
+      'Viagens': 'traveling',
+      'Tecnologia': 'technology',
+    }
+  end
 end
