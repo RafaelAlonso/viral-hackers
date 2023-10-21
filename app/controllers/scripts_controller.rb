@@ -1,4 +1,6 @@
 class ScriptsController < ApplicationController
+  before_action :set_script, only: %i[show]
+
   def index
     @scripts = current_user.scripts
   end
@@ -11,6 +13,7 @@ class ScriptsController < ApplicationController
     @script = Script.new(script_params)
     @script.user = current_user
     if @script.save
+      ScriptOutputJob.perform_later(@script.id)
       redirect_to @script
     else
       render :new
@@ -18,12 +21,16 @@ class ScriptsController < ApplicationController
   end
 
   def show
-    @script = Script.find(params[:id])
   end
 
   private
 
+  def set_script
+    @script = Script.find_by(id: params[:id])
+    redirect_back fallback_location: authenticated_root_path, alert: 'Could not find script' unless @script.present?
+  end
+
   def script_params
-    params.require(:script).permit(:category_id, :context, :duration, :mood, :description)
+    params.require(:script).permit(:category_id, :context, :duration, :mood, :description, :target_audience)
   end
 end

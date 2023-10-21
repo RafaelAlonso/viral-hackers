@@ -1,5 +1,4 @@
 module Chains
-
   class MainChain
     def self.call(script)
       @@paragraphs = ((script.duration * 1.5)/50).ceil
@@ -13,7 +12,7 @@ module Chains
 
       chat = Langchain::Conversation.new(llm: llm, temperature: 0.9, model: "gpt-4")
       chat.set_context(@@context_prompt)
-      chat.message( @@final_prompt)
+      chat.message(@@final_prompt)
     end
   end
 end
