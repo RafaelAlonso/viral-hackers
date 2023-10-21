@@ -3,7 +3,7 @@ class Script < ApplicationRecord
   belongs_to :category
   has_many :contexts, through: :category
 
-  validates :context, :duration, :mood, :status, presence: true
+  validates :duration, :mood, :status, presence: true
   validates :duration, inclusion: { in: [30, 60, 120] }
   validates :description, length: { minimum: 5, maximum: 250 }, allow_blank: true
 
