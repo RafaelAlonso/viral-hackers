@@ -1,0 +1,10 @@
+<h1>New Script<h1>
+
+<%= simple_form_for @script do |f| %>
+  <%= f.input :category, collection: Script.humanized_categories %>
+  <%= f.input :context %>
+  <%= f.input :duration, collection: [30, 60, 120] %>
+  <%= f.input :mood, collection: Script.moods.keys %>
+  <%= f.input :description %>
+  <%= f.submit %>
+<% end %>
