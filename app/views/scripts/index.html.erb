@@ -3,10 +3,10 @@
 <ul>
   <% @scripts.each do |script| %>
     <li>
-      <p><b>Categoria:</b> <%= script.category %></p>
-      <p><b>Contexto:</b> <%= script.context %></p>
+      <p><b>Categoria:</b> <%= script.category.name %></p>
       <p><b>Duração:</b> <%= script.duration %></p>
-      <p><b>Humor:</b> <%= script.mood %></p>
+      <p><b>Entonação:</b> <%= script.mood %></p>
+      <p><b>Público Alvo:</b> <%= script.target_audience %></p>
       <p><b>Status:</b> <%= script.status %></p>
       <%= link_to 'Ver Script', script_path(script) %>
     </li>

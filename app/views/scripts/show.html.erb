@@ -1,6 +1,17 @@
-<p><b>Categoria:</b> <%= @script.category %></p>
-<p><b>Contexto:</b> <%= @script.context %></p>
+<p><b>Categoria:</b> <%= @script.category.name %></p>
 <p><b>Duração:</b> <%= @script.duration %></p>
-<p><b>Humor:</b> <%= @script.mood %></p>
+<p><b>Entonação:</b> <%= @script.mood %></p>
+<p><b>Público Alvo:</b> <%= @script.target_audience %></p>
 <p><b>Descrição:</b> <%= @script.description %></p>
 <p><b>Status:</b> <%= @script.status %></p>
+
+<% case @script.status %>
+<% when 'complete' %>
+  <p><b>Output:</b> <%= @script.output %></p>
+<% when 'pending' %>
+  <%= link_to 'Cancelar Requisição', cancel_script_path(@script), data: { turbo_method: :put } %>
+<% when 'failed' %>
+  <%= link_to 'Tentar Novamente', retry_script_path(@script), data: { turbo_method: :put } %>
+<% end %>
+
+<%= link_to 'Deletar Script', script_path(@script), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza? Essa ação não poderá ser desfeita.'} %>
