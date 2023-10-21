@@ -1,5 +1,5 @@
 class ScriptsController < ApplicationController
-  before_action :set_script, only: %i[show]
+  before_action :set_script, only: %i[show retry cancel destroy]
 
   def index
     @scripts = current_user.scripts
@@ -23,11 +23,35 @@ class ScriptsController < ApplicationController
   def show
   end
 
+  def retry
+    if @script.update(status: :pending)
+      ScriptOutputJob.perform_later(@script.id)
+    else
+      render :show, alert: 'Erro ao tentar gerar output'
+    end
+  end
+
+  def cancel
+    if @script.canceled!
+      redirect_back fallback_location: @script
+    else
+      redirect_back fallback_location: authenticated_root_path, alert: 'Erro ao tentar cancelar script.'
+    end
+  end
+
+  def destroy
+    if @script.destroy
+      redirect_to authenticated_root_path
+    else
+      redirect_back fallback_location: authenticated_root_path, alert: 'Erro ao tentar deletar script.'
+    end
+  end
+
   private
 
   def set_script
     @script = Script.find_by(id: params[:id])
-    redirect_back fallback_location: authenticated_root_path, alert: 'Could not find script' unless @script.present?
+    redirect_back fallback_location: authenticated_root_path, alert: 'Script não pôde ser encontrado' unless @script.present?
   end
 
   def script_params
