@@ -14,7 +14,7 @@ module Chains
 
       chat = Langchain::Conversation.new(llm: llm, temperature: 0.9, model: "gpt-4")
       chat.set_context(@@context_prompt)
-      chat.message(@@message_prompt).split.count
+      chat.message(@@message_prompt)
     end
   end
 end
