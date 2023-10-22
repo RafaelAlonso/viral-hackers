@@ -1,4 +1,6 @@
 <%= turbo_stream_from @script %>
-<div id="<%= dom_id(@script) %>">
-  <%= render @script %>
+<div class="container py-3">
+  <div id="<%= dom_id(@script) %>">
+    <%= render @script %>
+  </div>
 </div>
