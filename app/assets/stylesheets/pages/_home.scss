@@ -1,1 +1,93 @@
-// Specific CSS for your home-page
+html, body, #home {
+	height: 100%;
+}
+
+#home{
+	background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.27)), asset-url("bg_home.png");
+	background-attachment: fixed;
+	background-size: 100%;
+	font-family: Helvetica,Arial,sans-serif;
+}
+
+/* Capa
+------------------------------*/
+.capa {
+	text-align: center;
+}
+
+.header-title {
+  color: white;
+}
+
+.header-subtitle {
+  color: #03e9f4;
+}
+
+.btn-custom {
+	color: white;
+	border-radius: 500px;
+	text-transform: uppercase;
+	transition: background 0.4s, color 0.4s;
+	padding: 10px 20px;
+}
+
+.btn-branco {
+	border: 2px solid white;
+}
+
+.btn-branco:hover {
+	background-color: white;
+	color: black;
+}
+
+/* Estrutura de conteúdos
+------------------------------*/
+.caixa {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.albuns {
+	padding: 10px 0;
+}
+
+#servicos h2, h3 {
+	color: white;
+}
+
+#servicos hr {
+  border-color: white; 
+  border-width: 2px;       
+}
+
+#servicos p {
+  color: #03e9f4;
+}
+
+#recursos h2 {
+	color: white;
+}
+
+#recursos h3 {
+	color: black;
+}
+
+#recursos p {
+	color: #03e9f4;
+}
+
+#conteudo {
+  background: #fff;
+}
+
+#conteudo p {
+  color: #03e9f4;
+}
+
+.card {
+  background: linear-gradient(#141e30, #243b55);
+}
+
+#conteudo h5 {
+  color: white;
+}
