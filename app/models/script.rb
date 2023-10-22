@@ -1,13 +1,11 @@
 class Script < ApplicationRecord
   belongs_to :user
+  belongs_to :category
+  has_many :contexts, through: :category
 
-  enum category: {
-    health: 0,
-    personal_development: 1,
-    marketing: 2,
-    traveling: 3,
-    technology: 4
-  }
+  validates :duration, :mood, :status, presence: true
+  validates :duration, inclusion: { in: [30, 60, 120] }
+  validates :description, length: { minimum: 5, maximum: 250 }, allow_blank: true
 
   enum mood: {
     informative: 0,
@@ -48,18 +46,4 @@ class Script < ApplicationRecord
     failed: 2,
     canceled: 3
   }
-
-  validates :category, :context, :duration, :mood, :status, presence: true
-  validates :duration, inclusion: { in: [30, 60, 120] }
-  validates :description, length: { minimum: 5, maximum: 250 }, allow_blank: true
-
-  def self.humanized_categories
-    {
-      'Saúde': 'health',
-      'Desenvolvimento Pessoal': 'personal_development',
-      'Marketing': 'marketing',
-      'Viagens': 'traveling',
-      'Tecnologia': 'technology',
-    }
-  end
 end

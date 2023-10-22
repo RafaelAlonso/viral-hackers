@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  require "sidekiq/web"
   devise_for :users
+
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+  end
 
   authenticated :user do
     root 'scripts#index', as: :authenticated_root
@@ -9,7 +14,10 @@ Rails.application.routes.draw do
     root 'pages#home', as: :unauthenticated_root
   end
 
-  # root "articles#index"
-
-  resources :scripts, only: [:new, :create, :show]
+  resources :scripts, only: [:new, :create, :show, :destroy] do
+    member do
+      put :cancel
+      put :retry
+    end
+  end
 end
