@@ -3,7 +3,7 @@ class Prompts::LongVideoDefinitionConstraints < Prompts::Base
     @@prompt = "O conteúdo deve ser dividido seguindo o padrão:
     Introdução: Uma introdução chamativa e que estimule o usuário a ficar até o final do vídeo. Exemplo: `Você vai descobrir os 5 melhores alimentos para aumentar sua massa muscular. O último é o mais poderoso, por isso, assista até o final.`
 
-    Apresentação_e_call_to_action_para_like: Exemplo: `Eu sou o #{nickname}, e se esse tema é interessante para você, já se inscreve no canal e aperta no like agora mesmo.`
+    Apresentação_e_call_to_action_para_like: Utilize o pseudônimo #{nickname} para o conteúdo Exemplo: `Eu sou o [PSEUDÔNIMO], e se esse tema é interessante para você, já se inscreve no canal e aperta no like agora mesmo.`
 
     Conteúdo: Aqui é onde o conteúdo prometido vai ser entregue para o usuário de forma clara. Utilize entre 800 a 1000 palavras, e 8 a 10 paragrafos.
 
