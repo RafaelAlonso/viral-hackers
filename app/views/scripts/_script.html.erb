@@ -58,7 +58,7 @@
           <p class="m-0 text-break"><%= script.output %></p>
           <div class="platform-actions mt-3">
             <% if script.platform_scripts.map(&:platform).exclude? 'Youtube' %>
-              <%= simple_form_for [@script, @platform_script] do |f| %>
+              <%= simple_form_for [script, PlatformScript.new] do |f| %>
                 <%= f.input :platform, as: :hidden, input_html: { value: 'Youtube' } %>
                 <%= f.submit 'Gerar script para o Youtube', class: 'btn btn-primary w-100 d-flex justify-content-center align-items-center' %>
               <% end %>

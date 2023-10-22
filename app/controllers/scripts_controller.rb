@@ -20,7 +20,6 @@ class ScriptsController < ApplicationController
   end
 
   def show
-    @platform_script = @script.platform_scripts.new
   end
 
   def retry
