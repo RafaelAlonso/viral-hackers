@@ -1,12 +1,18 @@
 class Script < ApplicationRecord
+  # associations
   belongs_to :user
   belongs_to :category
   has_many :contexts, through: :category
 
+  # validations
   validates :duration, :mood, :status, presence: true
   validates :duration, inclusion: { in: [30, 60, 120] }
   validates :description, length: { minimum: 5, maximum: 250 }, allow_blank: true
 
+  # callbacks
+  after_update :broadcast_update
+
+  # enums
   enum mood: {
     informativo: 0,
     inspiracional: 1,
@@ -39,11 +45,16 @@ class Script < ApplicationRecord
     narrativo: 28,
     descontraído: 29,
   }
-
   enum status: {
     pending: 0,
     complete: 1,
     failed: 2,
     canceled: 3
   }
+
+  private
+
+  def broadcast_update
+    broadcast_replace_later_to(self)
+  end
 end
