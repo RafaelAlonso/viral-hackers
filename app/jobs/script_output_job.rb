@@ -3,7 +3,7 @@ class ScriptOutputJob < ApplicationJob
 
   def perform(script_id)
     script = Script.find_by(id: script_id)
-    return unless script.present?
+    return unless script.present? && script.pending?
 
     output = Chains::MainChain.call(script)
     script.update(output: output, status: :complete)

@@ -52,6 +52,17 @@ class Script < ApplicationRecord
     canceled: 3
   }
 
+  STATUS_PT_BR = {
+    'pending' => 'processando',
+    'complete' => 'completo',
+    'failed' => 'erro',
+    'canceled' => 'cancelado'
+  }.freeze
+
+  def status_to_pt_br
+    STATUS_PT_BR[status]
+  end
+
   private
 
   def broadcast_update

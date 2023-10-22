@@ -1,0 +1,47 @@
+.script-card {
+  min-height: 200px;
+}
+
+.script-status {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+
+  .status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-flex;
+    margin-right: 4px;
+  }
+
+  &.status-pending {
+    color: rgba(242, 193, 17, .8);
+    .status {
+      background-color: rgba(242, 193, 17, .8);
+      box-shadow: 0 0 3px rgb(242, 193, 17);
+    }
+  }
+  &.status-complete {
+    color: rgba(0, 212, 0, .8);
+    .status {
+      background-color: rgba(0, 212, 0, .8);
+      box-shadow: 0 0 3px rgb(0, 212, 0);
+    }
+  }
+  &.status-failed {
+    color: rgba(212, 0, 0, 0.8);
+    .status {
+      background-color: rgba(212, 0, 0, 0.8);
+      box-shadow: 0 0 3px rgb(212, 0, 0);
+    }
+  }
+  &.status-canceled {
+    color: rgba(88, 93, 88, 0.866);
+    .status {
+      background-color: rgba(88, 93, 88, 0.866);
+      box-shadow: 0 0 3px rgb(88, 93, 88);;
+    }
+  }
+}
+

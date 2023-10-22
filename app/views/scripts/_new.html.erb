@@ -1,0 +1,10 @@
+<%= simple_form_for script do |f| %>
+  <div class="form-box">
+    <%= f.input :category_id, collection: Category.pluck(:name, :id), label: 'Categoria' %>
+    <%= f.input :duration, collection: [30, 60, 120], class: 'field-box', label: 'Duração (em segundos)' %>
+    <%= f.input :mood, collection: Script.moods.keys, class: 'field-box', label: 'Entonação do Script' %>
+    <%= f.input :target_audience, class: 'field-box', label: 'Público-Alvo' %>
+    <%= f.input :description, as: :text, class: 'field-box', label: 'Descrição do Conteúdo' %>
+    <%= f.submit 'Gerar Script', class: 'btn btn-success w-100' %>
+  </div>
+<% end %>

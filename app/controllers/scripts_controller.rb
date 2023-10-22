@@ -2,7 +2,8 @@ class ScriptsController < ApplicationController
   before_action :set_script, only: %i[show retry cancel destroy]
 
   def index
-    @scripts = current_user.scripts
+    @scripts = current_user.scripts.includes(:category).order(id: :desc)
+    @script = Script.new
   end
 
   def new
@@ -15,8 +16,6 @@ class ScriptsController < ApplicationController
     if @script.save
       ScriptOutputJob.perform_later(@script.id)
       redirect_to @script
-    else
-      render :new
     end
   end
 
