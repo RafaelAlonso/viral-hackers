@@ -1,17 +1,43 @@
-<p><b>Categoria:</b> <%= script.category.name %></p>
-<p><b>Duração:</b> <%= script.duration %></p>
-<p><b>Entonação:</b> <%= script.mood %></p>
-<p><b>Público Alvo:</b> <%= script.target_audience %></p>
-<p><b>Descrição:</b> <%= script.description %></p>
-<p><b>Status:</b> <%= script.status %></p>
+<div class="container py-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div></div>
+    <div class="actions">
+      <% if script.failed? %>
+        <%= link_to retry_script_path(script), class: 'btn btn-primary', title: 'Tentar Novamente', data: { turbo_method: :put, 'bs-toggle': 'tooltip', 'bs-placement': 'top' } do %>
+          <i class="fa-solid fa-repeat"></i>
+        <% end %>
+      <% end %>
 
-<% case script.status %>
-<% when 'complete' %>
-  <p><b>Output:</b> <%= script.output %></p>
-<% when 'pending' %>
-  <%= link_to 'Cancelar Requisição', cancel_script_path(script), data: { turbo_method: :put } %>
-<% when 'failed' %>
-  <%= link_to 'Tentar Novamente', retry_script_path(script), data: { turbo_method: :put } %>
-<% end %>
+      <% if script.pending? %>
+        <%= link_to cancel_script_path(script), class: 'btn btn-secondary', title: 'Cancelar', data: { 'bs-toggle': 'tooltip', 'bs-placement': 'top', turbo_method: :put } do %>
+          <i class="fa-solid fa-ban"></i>
+        <% end %>
+      <% else %>
+        <%= link_to script, class: 'btn btn-danger', title: 'Deletar', data: { turbo_method: :delete, turbo_confirm: 'Tem certeza? Essa ação não poderá ser desfeita.', 'bs-toggle': 'tooltip', 'bs-placement': 'top' } do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="card rounded-3 p-3">
+        <p><b>Categoria:</b> <br> <%= script.category.name %></p>
+        <p><b>Duração:</b> <br> <%= script.duration %></p>
+        <p><b>Entonação:</b> <br> <%= script.mood %></p>
+        <p><b>Público Alvo:</b> <br> <%= script.target_audience %></p>
+        <p class="text-break"><b>Descrição:</b> <br> <%= script.description %></p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <div class="card rounded-3 p-3">
+        <p><b>Status:</b> <%= script.status %></p>
 
-<%= link_to 'Deletar Script', script, data: { turbo_method: :delete, turbo_confirm: 'Tem certeza? Essa ação não poderá ser desfeita.'} %>
+        <% if script.complete? %>
+          <p class="m-0"><b>Resultado:</b></p>
+          <p class="m-0 text-break"><%= script.output %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

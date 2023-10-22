@@ -1,7 +1,7 @@
 <div class="container py-3">
   <div class="row gx-3 gy-3">
     <div class="col-12 col-sm-6 col-md-4">
-      <%= link_to new_script_path, class: 'text-decoration-none' do %>
+      <%= link_to "#newScript", class: 'text-decoration-none', data: { 'bs-toggle': "offcanvas" }, role: "button" do %>
         <div class="card script-card rounded-3 d-flex justify-content-center align-items-center">
           <div class='text-center'>
             <i class="fa-solid fa-plus"></i>
@@ -28,6 +28,12 @@
                 <i class="fa-solid fa-eye"></i>
               <% end %>
 
+              <% if script.failed? %>
+                <%= link_to retry_script_path(script), class: 'btn btn-primary', title: 'Tentar Novamente', data: { turbo_method: :put, 'bs-toggle': 'tooltip', 'bs-placement': 'top' } do %>
+                  <i class="fa-solid fa-repeat"></i>
+                <% end %>
+              <% end %>
+
               <% if script.pending? %>
                 <%= link_to cancel_script_path(script), class: 'btn btn-secondary', title: 'Cancelar', data: { 'bs-toggle': 'tooltip', 'bs-placement': 'top', turbo_method: :put } do %>
                   <i class="fa-solid fa-ban"></i>
@@ -37,16 +43,20 @@
                   <i class="fa-solid fa-trash"></i>
                 <% end %>
               <% end %>
-
-              <% if script.failed? %>
-                <%= link_to retry_script_path(script), class: 'btn btn-primary', title: 'Tentar Novamente', data: { turbo_method: :put, 'bs-toggle': 'tooltip', 'bs-placement': 'top' } do %>
-                  <i class="fa-solid fa-repeat"></i>
-                <% end %>
-              <% end %>
             </div>
           </div>
         </div>
       </div>
     <% end %>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="newScript" aria-labelledby="newScript">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="newScript">Novo Script</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <%= render 'new', script: @script %>
   </div>
 </div>
