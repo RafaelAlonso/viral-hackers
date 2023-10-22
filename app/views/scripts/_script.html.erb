@@ -14,4 +14,4 @@
   <%= link_to 'Tentar Novamente', retry_script_path(script), data: { turbo_method: :put } %>
 <% end %>
 
-<%= link_to 'Deletar Script', script_path(script), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza? Essa ação não poderá ser desfeita.'} %>
+<%= link_to 'Deletar Script', script, data: { turbo_method: :delete, turbo_confirm: 'Tem certeza? Essa ação não poderá ser desfeita.'} %>

@@ -2,7 +2,7 @@ class ScriptsController < ApplicationController
   before_action :set_script, only: %i[show retry cancel destroy]
 
   def index
-    @scripts = current_user.scripts
+    @scripts = current_user.scripts.includes(:category).order(id: :desc)
   end
 
   def new

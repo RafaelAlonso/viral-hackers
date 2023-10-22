@@ -1,0 +1,27 @@
+.script-card {
+  min-height: 200px;
+}
+
+.status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  &.status-pending {
+    background-color: rgba(242, 193, 17, .8);
+    box-shadow: 0 0 3px rgb(242, 193, 17);
+  }
+  &.status-complete {
+    background-color: rgba(0, 212, 0, .8);
+    box-shadow: 0 0 3px rgb(0, 212, 0);
+  }
+  &.status-failed {
+    background-color: rgba(212, 0, 0, 0.8);
+    box-shadow: 0 0 3px rgb(212, 0, 0);
+  }
+  &.status-canceled {
+    background-color: rgba(88, 93, 88, 0.866);
+    box-shadow: 0 0 3px rgb(88, 93, 88);;
+  }
+
+}

@@ -1,15 +1,52 @@
-<div class="container">
-  <h1>Scripts</h1>
-
-    <ul>
-      <% @scripts.each do |script| %>
-        <li>
-          <p><b>Categoria:</b> <%= script.category %></p>
-          <p><b>Contexto:</b> <%= script.context %></p>
-          <p><b>Duração:</b> <%= script.duration %></p>
-          <p><b>Humor:</b> <%= script.mood %></p>
-          <p><b>Status:</b> <%= script.status %></p>
-          <%= link_to 'Ver Script', script_path(script) %>
-        </li>
+<div class="container py-3">
+  <div class="row gx-3 gy-3">
+    <div class="col-12 col-sm-6 col-md-4">
+      <%= link_to new_script_path, class: 'text-decoration-none' do %>
+        <div class="card script-card rounded-3 d-flex justify-content-center align-items-center">
+          <div class='text-center'>
+            <i class="fa-solid fa-plus"></i>
+            <p class="mb-0">Novo script</p>
+          </div>
+        </div>
       <% end %>
-    </ul>
+    </div>
+    <% @scripts.each do |script| %>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="card script-card rounded-3">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h5 class="card-title">Script <%= script.id %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%= script.category.name %> em tom <%= script.mood %></h6>
+              </div>
+              <span class="status status-<%= script.status %>" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= script.status %>">
+              </span>
+            </div>
+            <p class="card-text"><%= script.description %></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <%= link_to script, class: 'btn btn-success', title: 'Visualizar', data: { 'bs-toggle': 'tooltip', 'bs-placement': 'top' } do %>
+                <i class="fa-solid fa-eye"></i>
+              <% end %>
+
+              <% if script.pending? %>
+                <%= link_to cancel_script_path(script), class: 'btn btn-secondary', title: 'Cancelar', data: { 'bs-toggle': 'tooltip', 'bs-placement': 'top', turbo_method: :put } do %>
+                  <i class="fa-solid fa-ban"></i>
+                <% end %>
+              <% else %>
+                <%= link_to script, class: 'btn btn-danger', title: 'Deletar', data: { turbo_method: :delete, turbo_confirm: 'Tem certeza? Essa ação não poderá ser desfeita.', 'bs-toggle': 'tooltip', 'bs-placement': 'top' } do %>
+                  <i class="fa-solid fa-trash"></i>
+                <% end %>
+              <% end %>
+
+              <% if script.failed? %>
+                <%= link_to retry_script_path(script), class: 'btn btn-primary', title: 'Tentar Novamente', data: { turbo_method: :put, 'bs-toggle': 'tooltip', 'bs-placement': 'top' } do %>
+                  <i class="fa-solid fa-repeat"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
