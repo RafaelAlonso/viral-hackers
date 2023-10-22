@@ -1,6 +1,7 @@
 module Chains
   class LongVideoChain
-    def self.call(script)
+    def self.call(platform_script)
+      script = platform_script.script
       @@base_script = script.output
 
       @@context_prompt = "#{Prompts::MainContext.build()} #{Prompts::LongVideoDefinitionConstraints.build(@@base_script, script.user.nickname, script.call_to_action)}"
@@ -8,7 +9,7 @@ module Chains
       llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_API_KEY"])
 
       @@message_prompt = "restrições = {categoria: #{script.category}, tom_do_roteiro: #{script.mood}, audiência_alvo: #{script.target_audience}
-      
+
       Conteúdo detalhado e completo com mais de 10 parágrafos:
       "
 

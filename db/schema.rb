@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_22_175831) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_22_181110) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_175831) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contexts_on_category_id"
+  end
+
+  create_table "platform_scripts", force: :cascade do |t|
+    t.bigint "script_id", null: false
+    t.string "platform"
+    t.text "output"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["script_id"], name: "index_platform_scripts_on_script_id"
   end
 
   create_table "scripts", force: :cascade do |t|
@@ -60,5 +70,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_175831) do
   end
 
   add_foreign_key "contexts", "categories"
+  add_foreign_key "platform_scripts", "scripts"
   add_foreign_key "scripts", "users"
 end
