@@ -3,7 +3,7 @@ module Chains
     def self.call(script)
       @@base_script = script.output
 
-      @@context_prompt = "#{Prompts::MainContext.build()} #{Prompts::TweetThreadDefinitionConstraints.build()}"
+      @@context_prompt = "#{Prompts::MainContext.build()} #{Prompts::TweetThreadDefinitionConstraints.build(@@base_script)}"
 
       llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_API_KEY"])
 
