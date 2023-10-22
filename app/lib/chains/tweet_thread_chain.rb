@@ -1,15 +1,15 @@
 module Chains
-  class SingleTweetChain
+  class TweetThreadChain
     def self.call(script)
       @@base_script = script.output
 
-      @@context_prompt = "#{Prompts::MainContext.build()} #{Prompts::SingleTweetDefinitionConstraints.build()}"
+      @@context_prompt = "#{Prompts::MainContext.build()} #{Prompts::TweetThreadDefinitionConstraints.build()}"
 
       llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_API_KEY"])
 
-      @@message_prompt = "restrições = {categoria: #{script.category}, tom_do_tweet: #{script.mood}, audiência_alvo: #{script.target_audience}
+      @@message_prompt = "restrições = {categoria: #{script.category}, tom_da_thread_de_tweets: #{script.mood}, audiência_alvo: #{script.target_audience}
       
-      Tweet gerado:
+      Thread de tweets gerada:
       "
 
       chat = Langchain::Conversation.new(llm: llm, temperature: 0.9, model: "gpt-4")

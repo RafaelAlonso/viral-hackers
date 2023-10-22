@@ -7,7 +7,7 @@ module Chains
 
       llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_API_KEY"])
 
-      @@message_prompt = "restrições = {categoria: #{script.category}, tom_do_roteiro: #{script.mood}, audiência_alvo: #{script.target_audience}
+      @@message_prompt = "restrições = {categoria: #{script.category}, tom_do_tweet: #{script.mood}, audiência_alvo: #{script.target_audience}
       
       Tweet gerado:
       "
