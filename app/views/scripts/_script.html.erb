@@ -22,26 +22,67 @@
   <div class="col-xs-12 col-md-6">
     <div class="card rounded-3 p-3">
       <p><b>Categoria:</b> <br> <%= script.category.name %></p>
-      <p><b>Duração:</b> <br> <%= script.duration %></p>
+      <p><b>Duração (em segundos):</b> <br> <%= script.duration %></p>
       <p><b>Entonação:</b> <br> <%= script.mood %></p>
       <p><b>Público Alvo:</b> <br> <%= script.target_audience %></p>
       <p class="text-break"><b>Descrição:</b> <br> <%= script.description %></p>
     </div>
   </div>
   <div class="col-xs-12 col-md-6">
-    <div class="card rounded-3 p-3 mt-3 mt-md-0">
-      <div class="d-flex align-items-center mb-3">
-        <p class='mb-0 me-1'><b>Status:</b></p>
-        <div class="script-status status-<%= script.status %>">
-          <span class="status" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= script.status_to_pt_br %>">
-          </span>
-          <span><%= script.status_to_pt_br %></span>
+    <div class="card rounded-3 p-3 mt-3 mt-md-0" data-controller="script">
+      <% if script.platform_scripts.count.positive? %>
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <a class="nav-link active" data-action="script#toggleTab" data-value="base">Base</a>
+          </li>
+          <% script.platform_scripts.each do |ps| %>
+            <li class="nav-item">
+              <a class="nav-link" data-action="script#toggleTab" data-value="<%= ps.platform %>"><%= ps.platform %></a>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div id="base-script" class="tab d-block">
+        <div class="d-flex align-items-center mb-3">
+          <p class='mb-0 me-1'><b>Status:</b></p>
+          <div class="script-status status-<%= script.status %>">
+            <span class="status" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= script.status_to_pt_br %>">
+            </span>
+            <span><%= script.status_to_pt_br %></span>
+          </div>
         </div>
+
+        <% if script.complete? %>
+          <p class="m-0"><b>Resultado:</b></p>
+          <p class="m-0 text-break"><%= script.output %></p>
+          <div class="platform-actions mt-3">
+            <% if script.platform_scripts.map(&:platform).exclude? 'Youtube' %>
+              <%= simple_form_for [@script, @platform_script] do |f| %>
+                <%= f.input :platform, as: :hidden, input_html: { value: 'Youtube' } %>
+                <%= f.submit 'Gerar script para o Youtube', class: 'btn btn-primary w-100 d-flex justify-content-center align-items-center' %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
-      <% if script.complete? %>
-        <p class="m-0"><b>Resultado:</b></p>
-        <p class="m-0 text-break"><%= script.output %></p>
+      <% script.platform_scripts.each do |ps| %>
+        <div id="<%= ps.platform %>-script" class="tab d-none">
+          <div class="d-flex align-items-center mb-3">
+          <p class='mb-0 me-1'><b>Status:</b></p>
+          <div class="script-status status-<%= ps.status %>">
+            <span class="status" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= ps.status_to_pt_br %>">
+            </span>
+            <span><%= ps.status_to_pt_br %></span>
+          </div>
+        </div>
+
+        <% if ps.complete? %>
+          <p class="m-0"><b>Resultado:</b></p>
+          <p class="m-0 text-break"><%= ps.output %></p>
+        <% end %>
+        </div>
       <% end %>
     </div>
   </div>

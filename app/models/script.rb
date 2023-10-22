@@ -3,6 +3,7 @@ class Script < ApplicationRecord
   belongs_to :user
   belongs_to :category
   has_many :contexts, through: :category
+  has_many :platform_scripts, dependent: :destroy
 
   # validations
   validates :duration, :mood, :status, presence: true

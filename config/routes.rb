@@ -19,5 +19,14 @@ Rails.application.routes.draw do
       put :cancel
       put :retry
     end
+
+    resources :platform_scripts, only: [:create]
   end
+
+  resources :platform_scripts, only: [:create, :destroy] do
+      member do
+        put :cancel
+        put :retry
+      end
+    end
 end

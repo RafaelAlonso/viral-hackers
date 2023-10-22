@@ -20,6 +20,7 @@ class ScriptsController < ApplicationController
   end
 
   def show
+    @platform_script = @script.platform_scripts.new
   end
 
   def retry
@@ -49,7 +50,7 @@ class ScriptsController < ApplicationController
   private
 
   def set_script
-    @script = Script.find_by(id: params[:id])
+    @script = current_user.scripts.includes(:platform_scripts).find_by(id: params[:id])
     redirect_back fallback_location: authenticated_root_path, alert: 'Script não pôde ser encontrado' unless @script.present?
   end
 
