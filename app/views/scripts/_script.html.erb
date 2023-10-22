@@ -1,4 +1,3 @@
-<div>
 <p><b>Categoria:</b> <%= script.category.name %></p>
 <p><b>Duração:</b> <%= script.duration %></p>
 <p><b>Entonação:</b> <%= script.mood %></p>
@@ -14,6 +13,5 @@
 <% when 'failed' %>
   <%= link_to 'Tentar Novamente', retry_script_path(script), data: { turbo_method: :put } %>
 <% end %>
-</div>
 
 <%= link_to 'Deletar Script', script_path(script), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza? Essa ação não poderá ser desfeita.'} %>
