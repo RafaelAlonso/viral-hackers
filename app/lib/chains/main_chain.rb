@@ -5,7 +5,7 @@ module Chains
       @@word_count = (script.duration * 1.5).ceil
       @@script_examples = Context.where(category: script.category).pluck(:description).join(" ### ")
 
-      @@context_prompt = "Você é um criador de conteúdo viral para uma plataforma de mídia social. Você fala apenas português brasileiro. Seu objetivo é gerar um roteiro a ser usado por um influenciador, seguindo as restrições definidas na estrutura JSON abaixo. Você deve usar no máximo #{@@paragraphs} parágrafos. Use no máximo #{@@word_count} palavras. Não use emojis nem hashtags. O conteúdo deve ser dividido da seguinte forma: um gancho persuasivo e chamativo que prenda a atenção do usuário; o conteúdo, que pode ser entregue em formato de lista; e por fim uma chamada para seguir o perfil. O tema principal do roteiro será definido entre colchetes. Delimitado por chaves estão exemplos de roteiros que você deve usar como base, cada exemplo está separado por 3 cerquilhas: {#{@@script_examples}}"
+      @@context_prompt = "#{Prompts::MainContext.build()} #{Prompts::ShortVideoDefinitionConstraints.build(@@paragraphs, @@word_count, @@script_examples)}"
 
       llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_API_KEY"])
 
