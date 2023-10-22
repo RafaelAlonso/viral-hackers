@@ -3,22 +3,16 @@
 
   <%= simple_form_for @script do |f| %>
     <div class="form-box">
-      <%= f.input :category, collection: Script.humanized_categories, class: 'field-box' %>
-      <%= f.input :context, class: 'field-box'%>
-      <%= f.input :context, class: 'field-box'%>
+      <%= f.input :category_id, collection: Category.pluck(:name, :id), class: 'field-box' %>
       <%= f.input :duration, collection: [30, 60, 120], class: 'field-box'%>
       <%= f.input :mood, collection: Script.moods.keys, class: 'field-box'%>
+      <%= f.input :target_audience, class: 'field-box' %>
       <%= f.input :description, class: 'field-box'%>
+      <%= f.input :target_audience %>
+      <%= f.input :description %>
       <div class='btn-login'>
-        <%= content_tag(:span, class: 'new-script') do %>
-          <%= content_tag(:span, class: 'new-script') do %>
-            <%= content_tag(:span, class: 'new-script') do %>
-              <%= content_tag(:span, class: 'new-script') do %>
-                <%= f.submit %>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
+        <span class="new_script"></span><span class="new_script"></span><span class="new_script"></span><span class="new_script"></span>
+        <%= f.submit %>
       </div>
     </div>
   <% end %>
