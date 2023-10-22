@@ -7,14 +7,14 @@ module Chains
 
       llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_API_KEY"])
 
-      @@final_prompt = "restrições = {categoria: #{script.category}, tom_do_roteiro: #{script.mood}, audiência_alvo: #{script.target_audience}
+      @@message_prompt = "restrições = {categoria: #{script.category}, tom_do_roteiro: #{script.mood}, audiência_alvo: #{script.target_audience}
       
       Conteúdo detalhado e completo com mais de 10 parágrafos:
       "
 
       chat = Langchain::Conversation.new(llm: llm, temperature: 0.9, model: "gpt-4")
       chat.set_context(@@context_prompt)
-      chat.message(@@final_prompt).split.count
+      chat.message(@@message_prompt).split.count
     end
   end
 end
