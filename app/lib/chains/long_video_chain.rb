@@ -4,7 +4,7 @@ module Chains
       script = platform_script.script
       @@base_script = script.output
 
-      @@context_prompt = "#{Prompts::MainContext.build()} #{Prompts::LongVideoDefinitionConstraints.build(@@base_script)}"
+      @@context_prompt = "#{Prompts::MainContext.build()} #{Prompts::LongVideoDefinitionConstraints.build(@@base_script, script.user.nickname, script.call_to_action)}"
 
       llm = Langchain::LLM::OpenAI.new(api_key: ENV["OPENAI_API_KEY"])
 
