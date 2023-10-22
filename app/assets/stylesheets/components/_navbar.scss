@@ -1,6 +1,31 @@
 .navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+  background-color: transparent;
+}
+
+.nav-link{
+  color: #fff
+}
+.nav-link:hover{
+  color: #03e9f4;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color: #03e9f4;
+}
+
+.fa-hashtag {
+  font-size: x-large;
+  }
+
+.navbar-lewagon .dropdown-menu {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+}
+
+.navbar-lewagon .dropdown-item {
+  background-color: transparent;
+  color: #fff;
 }
 
 .navbar-lewagon .navbar-collapse {
