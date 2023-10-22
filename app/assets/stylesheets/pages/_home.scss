@@ -51,8 +51,12 @@ html, body, #home {
 	padding: 10px 0;
 }
 
-#servicos h2, h3 {
-	color: white;
+#servicos h2 {
+	color: #111;
+}
+
+#servicos h3 {
+  color: #111;
 }
 
 #servicos hr {
@@ -65,11 +69,11 @@ html, body, #home {
 }
 
 #recursos h2 {
-	color: white;
+	color: #111;
 }
 
 #recursos h3 {
-	color: black;
+	color: #111;
 }
 
 #recursos p {
@@ -85,9 +89,9 @@ html, body, #home {
 }
 
 .card {
-  background: linear-gradient(#141e30, #243b55);
+  background: linear-gradient(#243b55, #141e30);
 }
 
 #conteudo h5 {
-  color: white;
+  color: #111;
 }
