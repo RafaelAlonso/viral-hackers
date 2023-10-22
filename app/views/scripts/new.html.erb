@@ -1,19 +1,21 @@
-<div class="container">
-  <h1>New Script</h1>
-
-  <%= simple_form_for @script do |f| %>
-    <div class="form-box">
-      <%= f.input :category_id, collection: Category.pluck(:name, :id), class: 'field-box' %>
-      <%= f.input :duration, collection: [30, 60, 120], class: 'field-box'%>
-      <%= f.input :mood, collection: Script.moods.keys, class: 'field-box'%>
-      <%= f.input :target_audience, class: 'field-box' %>
-      <%= f.input :description, class: 'field-box'%>
-      <%= f.input :target_audience %>
-      <%= f.input :description %>
-      <div class='btn-login'>
-        <span class="new_script"></span><span class="new_script"></span><span class="new_script"></span><span class="new_script"></span>
-        <%= f.submit %>
+<div class="login-box">
+  <h2>Novo Script</h2>
+  <div class="user-box">
+    <%= simple_form_for @script do |f| %>
+      <div class="form-inputs">
+        <%= f.input :category_id, collection: Category.pluck(:name, :id) %>
+        <%= f.input :duration, collection: [30, 60, 120] %>
+        <%= f.input :mood, collection: Script.moods.keys %>
+        <%= f.input :target_audience, class: 'field-box' %>
+        <%= f.input :description %>
       </div>
-    </div>
-  <% end %>
+      <div class='btn-login script'>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <%= f.button :submit, "Criar" %>
+      </div>
+    <% end %>
+  </div>
 </div>
