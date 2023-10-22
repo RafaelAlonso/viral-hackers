@@ -59,6 +59,10 @@ body {
   margin-left: 30%;
 }
 
+.login-box .user-box .btn-login-password:hover {
+   color: #03e9f4;
+}
+
 .login-box .user-box .btn-login input {
   color: #03e9f4;
   font-size: 16px;
@@ -77,6 +81,7 @@ body {
               0 0 50px #03e9f4,
               0 0 100px #03e9f4;
 }
+
 
 .login-box .btn-login span {
   position: absolute;
@@ -169,4 +174,16 @@ body {
   text-decoration: none;
   font-size: 14px;
   transition: .5s;
+}
+
+.form-actions a:hover {
+  color: #03e9f4;
+}
+
+.form-text {
+  color: #03e9f4;
+}
+
+.color-input {
+  color: #03e9f4;
 }
