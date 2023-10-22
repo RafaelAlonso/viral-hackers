@@ -9,7 +9,7 @@ module Chains
 
       @@message_prompt = "restrições = {categoria: #{script.category}, tom_da_thread_de_tweets: #{script.mood}, audiência_alvo: #{script.target_audience}
       
-      Thread de tweets gerada:
+      Thread de tweets com cada tweet separado por 3 cerquilhas:
       "
 
       chat = Langchain::Conversation.new(llm: llm, temperature: 0.9, model: "gpt-4")
