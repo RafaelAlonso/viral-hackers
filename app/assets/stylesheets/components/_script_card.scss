@@ -1,5 +1,10 @@
 .script-card {
   min-height: 200px;
+  color: #fff
+}
+
+.nav-item {
+  cursor: pointer;
 }
 
 .script-status {
@@ -37,10 +42,10 @@
     }
   }
   &.status-canceled {
-    color: rgba(88, 93, 88, 0.866);
+    color: rgba(200, 200, 200, 0.866);
     .status {
-      background-color: rgba(88, 93, 88, 0.866);
-      box-shadow: 0 0 3px rgb(88, 93, 88);;
+      background-color: rgba(200, 200, 200, 0.866);
+      box-shadow: 0 0 3px rgb(200, 200, 200);;
     }
   }
 }

@@ -20,7 +20,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12 col-md-6">
-    <div class="card rounded-3 p-3">
+    <div class="card rounded-3 p-3 text-white">
       <p><b>Categoria:</b> <br> <%= script.category.name %></p>
       <p><b>Duração (em segundos):</b> <br> <%= script.duration %></p>
       <p><b>Entonação:</b> <br> <%= script.mood %></p>
@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="col-xs-12 col-md-6">
-    <div class="card rounded-3 p-3 mt-3 mt-md-0" data-controller="script">
+    <div class="card rounded-3 p-3 mt-3 mt-md-0 text-white" data-controller="script">
       <% if script.platform_scripts.count.positive? %>
         <ul class="nav nav-tabs mb-3">
           <li class="nav-item">
@@ -58,9 +58,9 @@
           <p class="m-0 text-break"><%= script.output %></p>
           <div class="platform-actions mt-3">
             <% if script.platform_scripts.map(&:platform).exclude? 'Youtube' %>
-              <%= simple_form_for [@script, @platform_script] do |f| %>
+              <%= simple_form_for [script, PlatformScript.new] do |f| %>
                 <%= f.input :platform, as: :hidden, input_html: { value: 'Youtube' } %>
-                <%= f.submit 'Gerar script para o Youtube', class: 'btn btn-primary w-100 d-flex justify-content-center align-items-center' %>
+                <%= f.submit 'Gerar script para o Youtube', class: 'btn btn-success text-white w-100 d-flex justify-content-center align-items-center' %>
               <% end %>
             <% end %>
           </div>
